@@ -57,8 +57,8 @@ jobs:
       - name: Generate Katze GeoIP checksum
         run: |
           cd output
-          sha256sum geoip-katze.dat > geoip-katze.dat.sha256sum
-          sha256sum --check --strict geoip-katze.dat.sha256sum
+          sha256sum geoip.dat > geoip.dat.sha256sum
+          sha256sum --check --strict geoip.dat.sha256sum
 
       - name: Git push assets to "release" branch
         run: |

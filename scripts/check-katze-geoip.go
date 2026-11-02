@@ -67,7 +67,7 @@ func main() {
 	wanted := make(map[string]bool)
 	outputs := 0
 	for _, output := range config.Output {
-		if output.Type != "v2rayGeoIPDat" || output.Action != "output" || output.Args.OutputName != "geoip-katze.dat" {
+		if output.Type != "v2rayGeoIPDat" || output.Action != "output" || output.Args.OutputName != "geoip.dat" {
 			continue
 		}
 		outputs++
@@ -80,16 +80,16 @@ func main() {
 		}
 	}
 	if len(config.Output) != 1 || outputs != 1 || len(wanted) == 0 {
-		log.Fatal("expected only geoip-katze.dat with a nonempty wantedList")
+		log.Fatal("expected only geoip.dat with a nonempty wantedList")
 	}
-	subset := load(filepath.Join(os.Args[2], "geoip-katze.dat"))
+	subset := load(filepath.Join(os.Args[2], "geoip.dat"))
 	for code := range wanted {
 		if subset[code] == nil {
 			log.Fatalf("missing required category %s", code)
 		}
 	}
 	if len(subset) != len(wanted) {
-		log.Fatal("geoip-katze.dat contains unexpected categories")
+		log.Fatal("geoip.dat contains unexpected categories")
 	}
 	names := make([]string, 0, len(wanted))
 	for code := range wanted {
@@ -99,5 +99,5 @@ func main() {
 	if err := os.WriteFile(filepath.Join(os.Args[2], "geoip-katze.txt"), []byte(strings.Join(names, "\n")+"\n"), 0644); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("geoip-katze.dat: verified %d categories and their CIDRs\n", len(wanted))
+	fmt.Printf("geoip.dat: verified %d categories and their CIDRs\n", len(wanted))
 }

@@ -117,7 +117,7 @@
       "action": "output",
       "args": {
         "outputDir": "./output",
-        "outputName": "geoip-katze.dat",
+        "outputName": "geoip.dat",
         "wantedList": [
           "az",
           "by",
